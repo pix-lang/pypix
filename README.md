@@ -1,7 +1,7 @@
 # pypix
 The Official interpreter for the Pix programming language.
 
-![pix-logo-3](https://user-images.githubusercontent.com/77634274/133933804-9f5bba1f-0537-44da-b939-aca6f229faa4.jpeg)
+![pixlogo3dup](https://user-images.githubusercontent.com/77634274/133933971-7c102160-9f8a-4944-93af-d29ed5465ce6.jpeg)
 
 
 ## Pix
