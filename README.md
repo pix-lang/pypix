@@ -1,6 +1,8 @@
 # pypix
 The Official interpreter for the Pix programming language.
-[image here]
+
+![pix-logo-3](https://user-images.githubusercontent.com/77634274/133933804-9f5bba1f-0537-44da-b939-aca6f229faa4.jpeg)
+
 
 ## Pix
   - Pix is a programming language dedicated to readable syntax and usability
@@ -12,7 +14,9 @@ The Official interpreter for the Pix programming language.
 
 ## Installation 
   - You can install the latest version of Pix directly from the packages section in Github.
-  [image here]
+
+![image](https://user-images.githubusercontent.com/77634274/133933845-7a8d1c4b-0345-4c62-bcf3-00ee2f3c1952.png)
+
 
 ## Building and running Pix locally
   - Build requirements: `python 3`, `pip`
