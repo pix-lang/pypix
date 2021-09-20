@@ -1,3 +1,5 @@
+import cython
+
 token_names = [
     "INTEGER",
     "PLUS",
@@ -5,7 +7,9 @@ token_names = [
     "EOF"
 ]
 
+@cython.cclass
 class Token:
+    @cython.ccall
     def __init__(self, type: str, value) -> None:
         '''
         Type can be any of the token names
