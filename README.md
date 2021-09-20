@@ -22,6 +22,7 @@ The Official interpreter for the Pix programming language.
   - Build requirements: `python 3`, `pip`
   - `git clone https://github.com/pix-lang/pypix` Clone the github repository
   - `cd pypix` Go into the directory
+  - `pip install -r requirements.txt` Get the necessary packages
   - Edit the examples/hello.pix file and try writing some Pix code
   - `python -m Pix.interpreter examples/hello.pix` run your code
 
