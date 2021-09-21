@@ -9,6 +9,7 @@ class Tokenizer:
         self.text: str = text
         # Index of the text str
         self.pos = -0
+        self.current_char = self.text[self.pos]
         # Current token instance
         self.current_token: Token = None
 
@@ -17,35 +18,51 @@ class Tokenizer:
         raise Exception("Error while parsing input")
 
 
-    def get_next_token(self) -> Token:
-        # Returning None if reading further than text
+    def advance(self):
+        """Advance the 'pos' pointer and set the 'current_char' variable."""
+        self.pos += 1
         if self.pos > len(self.text) - 1:
-            return Token(EOF, None)
+            self.current_char = None  # Indicates end of input
+        else:
+            self.current_char = self.text[self.pos]
 
-        current_char = self.text[self.pos]
 
-        if current_char.isdigit():
-            token = Token(INTEGER, int(current_char))
-            self.pos += 1
+    def skip_whitespace(self):
+        while (self.current_char is not None) and self.current_char.isspace():
+            self.advance()
 
-            return token
-        
-        if current_char == "+":
-            token = Token(PLUS, current_char)
-            self.pos += 1
 
-            return token
-        
-        if current_char == "-":
-            token = Token(MINUS, current_char)
-            self.pos += 1
+    def integer(self):
+        """Return a (multidigit) integer consumed from the input."""
+        result = ''
+        while self.current_char is not None and self.current_char.isdigit():
+            result += self.current_char
+            self.advance()
+            
+        return int(result)
 
-            return token
 
-        # 'return' keyword in Python ends the function
-        # If nothing was returned, error will be raised 
-        # Most likely due to Syntax Errors
-        self.error()
+    def get_next_token(self) -> Token:
+        while self.current_char is not None:
+
+            if self.current_char.isspace():
+                self.skip_whitespace()
+                continue
+
+            if self.current_char.isdigit():
+                return Token(INTEGER, self.integer())
+
+            if self.current_char == '+':
+                self.advance()
+                return Token(PLUS, '+')
+
+            if self.current_char == '-':
+                self.advance()
+                return Token(MINUS, '-')
+
+            self.error()
+
+        return Token(EOF, None)
 
 
     def eat(self, token_type: str):
@@ -62,7 +79,10 @@ class Tokenizer:
         self.eat(INTEGER)
 
         op = self.current_token
-        self.eat(PLUS)
+        if op.type == PLUS:
+            self.eat(PLUS)
+        elif op.type == MINUS:
+            self.eat(MINUS)
 
         right = self.current_token
         self.eat(INTEGER)
