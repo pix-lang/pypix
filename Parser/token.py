@@ -2,6 +2,8 @@ token_names = [
     "INTEGER",
     "PLUS",
     "MINUS",
+    "MULT",
+    "DIV",
     "EOF"
 ]
 

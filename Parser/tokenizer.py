@@ -1,7 +1,7 @@
 from .token import Token
 from .token import token_names 
 
-INTEGER, PLUS, MINUS, EOF = token_names
+INTEGER, PLUS, MINUS, MULT, DIV, EOF = token_names
 
 
 class Tokenizer:
@@ -60,6 +60,14 @@ class Tokenizer:
                 self.advance()
                 return Token(MINUS, '-')
 
+            if self.current_char == '*':
+                self.advance()
+                return Token(MULT, '*')
+
+            if self.current_char == '/':
+                self.advance()
+                return Token(DIV, '/')
+
             self.error()
 
         return Token(EOF, None)
@@ -72,26 +80,29 @@ class Tokenizer:
             self.error()
 
 
+    def term(self):
+        token = self.current_token
+        self.eat(INTEGER)
+        
+        return token.value
+
     def expr(self):
         self.current_token = self.get_next_token()
 
-        left = self.current_token
-        self.eat(INTEGER)
-
-        op = self.current_token
-        if op.type == PLUS:
-            self.eat(PLUS)
-        elif op.type == MINUS:
-            self.eat(MINUS)
-
-        right = self.current_token
-        self.eat(INTEGER)
-
-        result = 0
-        if op.type == PLUS:
-            result = left.value + right.value
-        if op.type == MINUS:
-            result = left.value - right.value
+        result = self.term()
+        while self.current_token.type in (PLUS, MINUS, MULT, DIV):
+            if self.current_token.type == PLUS:
+                self.eat(PLUS)
+                result += self.term()
+            if self.current_token.type == MINUS:
+                self.eat(MINUS)
+                result -= self.term()
+            if self.current_token.type == MULT:
+                self.eat(MULT)
+                result *= self.term()
+            if self.current_token.type == DIV:
+                self.eat(DIV)
+                result = result / self.term()
 
         return result
 
