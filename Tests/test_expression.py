@@ -1,7 +1,7 @@
 import unittest 
 from Parser.tokenizer import Tokenizer
 
-# py -m unittest Tests\test_expression.py
+# py -m unittest Tests/test_expression.py
 
 class TestExpression(unittest.TestCase):
     
@@ -49,6 +49,7 @@ class TestExpression(unittest.TestCase):
         tests = {
             "10 / 5": 2,
             "10 / 5 / 2": 1,
+            "5 / 2": 2.5,
             "400 / 5": 80
         }
 

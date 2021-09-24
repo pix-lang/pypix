@@ -1,0 +1,24 @@
+
+func fizz_buzz() {
+    for (i; 1 -> 101) {
+        def output = ""
+        if (i % 3 & i % 5) {
+            output = "FizzBuzz"
+        }
+        elif (i % 3) {
+            output = "Fizz"
+        }  
+        elif (i % 5) {
+            output = "Buzz"
+        }
+        else {
+            output = i.to_string  // Cannot change type 
+        }
+
+        pout(output)
+    }
+}
+
+func main() {
+    fizz_buzz()
+}
