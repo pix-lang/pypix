@@ -1,7 +1,7 @@
 # pypix
-<center>
-  <img src="https://user-images.githubusercontent.com/77634274/134150919-b5282119-55fe-44c0-b769-a06aed377374.jpeg" alt="The Official Interpreter for the Pix programming language">
-</center>
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/77634274/134150919-b5282119-55fe-44c0-b769-a06aed377374.jpeg" />
+</div>
 
 ## Pix
   - Pix is a programming language dedicated to readable syntax and usability
