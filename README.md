@@ -1,6 +1,8 @@
 # pypix
 <div align="center">
+  <br/>
   <b>The official interpreter for the Pix programming language.</b>
+  <br/>
   <img src="https://user-images.githubusercontent.com/77634274/134150919-b5282119-55fe-44c0-b769-a06aed377374.jpeg" />
 </div>
 
