@@ -1,7 +1,7 @@
 import sys
 from Parser.tokenizer import Tokenizer
 
-# py -m Pix.interpreter Examples\hello.pix
+# py -m Pix.interpreter Examples/hello.pix
 
 def main():
     file = sys.argv[1]
