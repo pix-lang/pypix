@@ -4,7 +4,7 @@
   - Please read this file entirely to make sure you are following all the rules :)
   - The first rule when wanting to add something is either open an issue in Github, or ask to solve someone elses issue.
   - Name your branch according to the issue number, example: `feature/issue-1002`
-  - When done with your changes, please run the mentioned below <a href="https://github.com/pix-lang/pypix/edit/main/CONTRIBUTING.md#testing">tests</a> to make sure that everything else still works.
+  - When done with your changes, please run the mentioned below <a href="https://github.com/pix-lang/pypix/blob/main/CONTRIBUTING.md#testing">tests</a> to make sure that everything else still works.
  
 ## Prerequisite Knowledge
   - Incase you feel like contributing to PyPix but are unaware of how much you need to know,
