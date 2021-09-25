@@ -4,13 +4,13 @@
   - Please read this file entirely to make sure you are following all the rules :)
   - The first rule when wanting to add something is either open an issue in Github, or ask to solve someone elses issue.
   - Name your branch according to the issue number, example: `feature/issue-1002`
-  - When done with your changes, please run the mentioned below tests to make sure that everything else still works.
+  - When done with your changes, please run the mentioned below <a href="https://github.com/pix-lang/pypix/edit/main/CONTRIBUTING.md#testing">tests</a> to make sure that everything else still works.
  
 ## Prerequisite Knowledge
   - Incase you feel like contributing to PyPix but are unaware of how much you need to know,
   - PyPix code contributions would normally require knowledge on how lexical analysis works and decent knowledge at Python
   - Having worked with larger open source repositories and contrited to them is very important
-  - Knowing Python conventions and format as per PEP8 -> https://www.python.org/dev/peps/pep-0008/
+  - Knowing Python conventions and format as per <a href="https://www.python.org/dev/peps/pep-0008/">PEP8</a>
 
 ## File structure
   - There are many files involved in PyPix and this can make you feel overwhelmed but dont worry :)
