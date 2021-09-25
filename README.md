@@ -13,7 +13,7 @@ The Official interpreter for the Pix programming language.
   It is also to test out my Python skills and learn more, while being an absolutely fun project.
 
 ## Installation 
-  - You can install the latest version of Pix directly from the releases section in Github -> https://github.com/pix-lang/pypix/releases/
+  - You can install the latest version of Pix directly from the <a href="https://github.com/pix-lang/pypix/releases/">releases</a> section in Github.
 
 ## Building and running Pix locally
   - Build requirements: `python 3`, `pip`
