@@ -15,8 +15,6 @@ The Official interpreter for the Pix programming language.
 ## Installation 
   - You can install the latest version of Pix directly from the releases section in Github -> https://github.com/pix-lang/pypix/releases/
 
-Tests: py -m unittest discover -s Tests/
-
 ## Building and running Pix locally
   - Build requirements: `python 3`, `pip`
   - `git clone https://github.com/pix-lang/pypix` Clone the github repository
@@ -25,3 +23,5 @@ Tests: py -m unittest discover -s Tests/
   - Edit the Examples/hello.pix file and try writing some Pix code
   - `python -m Pix.interpreter examples/hello.pix` run your code
 
+## Contributing
+  - For details on how to make acceptable contributions, please look at -> https://github.com/pix-lang/pypix/blob/main/CONTRIBUTING.md
