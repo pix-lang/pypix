@@ -1,9 +1,11 @@
 <div align="center">
+  <img src="https://user-images.githubusercontent.com/77634274/134150919-b5282119-55fe-44c0-b769-a06aed377374.jpeg" />
   <br/>
   <b>The official interpreter for the Pix programming language.</b>
   <br/>
   <br/>
-  <img src="https://user-images.githubusercontent.com/77634274/134150919-b5282119-55fe-44c0-b769-a06aed377374.jpeg" />
+  <a href="https://github.com/pix-lang/pypix/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-GPLv3-blue.svg"/></a>
+  
 </div>
 
 ## Pix
