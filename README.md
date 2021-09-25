@@ -24,4 +24,4 @@ The Official interpreter for the Pix programming language.
   - `python -m Pix.interpreter examples/hello.pix` run your code
 
 ## Contributing
-  - For details on how to make acceptable contributions, please look at -> https://github.com/pix-lang/pypix/blob/main/CONTRIBUTING.md
+  - For details on how to make acceptable contributions, please look at -> <a href="https://github.com/pix-lang/pypix/blob/main/CONTRIBUTING.md">Contributing</a>
