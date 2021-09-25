@@ -1,4 +1,3 @@
-# pypix
 <div align="center">
   <br/>
   <b>The official interpreter for the Pix programming language.</b>
