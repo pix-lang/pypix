@@ -1,19 +1,19 @@
-import unittest 
+import unittest
 from Parser.tokenizer import Tokenizer
+
 
 # py -m unittest Tests/test_expression.py
 
 class TestExpression(unittest.TestCase):
-    
+
     def expression_equal(self, tests: dict):
-        '''The "tests" dictionary contains an expression and the expected return value 
-        after parsing'''
+        """The "tests" dictionary contains an expression and the expected return value
+        after parsing"""
         for line in tests:
             token_stream = Tokenizer(line)
             result = token_stream.expr()
 
             self.assertEqual(result, tests[line])
-
 
     def test_add(self):
         tests = {
@@ -21,9 +21,8 @@ class TestExpression(unittest.TestCase):
             "1 + 1 + 1": 3,
             "1000 + 3": 1003
         }
-        
-        self.expression_equal(tests)
 
+        self.expression_equal(tests)
 
     def test_sub(self):
         tests = {
@@ -34,8 +33,7 @@ class TestExpression(unittest.TestCase):
 
         self.expression_equal(tests)
 
-
-    def test_mult(self):
+    def test_mul(self):
         tests = {
             "10 * 5": 50,
             "10 * 5 * 2": 100,
@@ -43,7 +41,6 @@ class TestExpression(unittest.TestCase):
         }
 
         self.expression_equal(tests)
-
 
     def test_div(self):
         tests = {
@@ -55,7 +52,6 @@ class TestExpression(unittest.TestCase):
 
         self.expression_equal(tests)
 
-
     def test_all_operators(self):
         tests = {
             "10 * 5 - 3 / 3 + 1": 16.666666666666664,
@@ -64,4 +60,3 @@ class TestExpression(unittest.TestCase):
         }
 
         self.expression_equal(tests)
-

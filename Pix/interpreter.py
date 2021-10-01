@@ -1,6 +1,7 @@
 import sys
 from Parser.tokenizer import Tokenizer
 
+
 # py -m Pix.interpreter Examples/hello.pix
 
 def main():
@@ -14,6 +15,6 @@ def main():
 
         print(result)
 
+
 if __name__ == "__main__":
     main()
-
