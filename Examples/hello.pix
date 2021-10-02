@@ -1,1 +1,1 @@
-pout () {}
+if (condition) {evaluation}
