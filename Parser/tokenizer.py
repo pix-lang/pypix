@@ -120,8 +120,8 @@ class Tokenizer:
         return result
 
     def expr(self):
-        # Pattern Expression : [INTEGER, OPERATOR]* INTEGER
-        # Pattern Function   : [FUNC, ARG: [LPAREN, ARG*, RPAREN], EVAL: [LCURL, EXEC*, RCURL]]
+        # Pattern Expression : [INTEGER, [OPERATOR, INTEGER]*]
+        # Pattern Function   : [FUNC, ID, ARG: [LPAREN, ARG*, RPAREN], EVAL: [LCURL, EXEC*, RCURL]]
         self.current_token = self.get_next_token()
         result = None
 
