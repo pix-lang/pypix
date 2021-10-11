@@ -3,7 +3,6 @@ from Parser.tokenizer import Tokenizer
 
 
 # py -m unittest Tests/test_expression.py
-
 class TestExpression(unittest.TestCase):
 
     def expression_equal(self, tests: dict):

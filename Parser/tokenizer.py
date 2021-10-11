@@ -1,7 +1,9 @@
 from Parser.token import Token, TokenType
 from Parser.static import categorize
 
-operators = ["PLUS", "MINUS", "MULT", "DIV"]
+operators = ["+", "-", "*", "/", ">"]
+expr_operator_types = ["PLUS", "MINUS", "MULT", "DIV"]
+cond_operators = [">", "<"]
 separators = [" ", "("]
 
 
@@ -72,6 +74,14 @@ class Tokenizer:
                 self.advance()
                 return Token(TokenType.DIV.name, TokenType.DIV.value)
 
+            if self.current_char == ">":
+                self.advance()
+                return Token(TokenType.GREATER.name, TokenType.GREATER.value)
+
+            if self.current_char == "<":
+                self.advance()
+                return Token(TokenType.LESSER.name, TokenType.LESSER.value)
+
             if self.current_char not in operators + separators:
                 result = ""
                 while self.current_char not in operators + separators:
@@ -96,28 +106,50 @@ class Tokenizer:
 
         return token.value
 
-    def term_lexem(self):
+    def term(self, expected_type):
         token = self.current_token
-        self.eat("LEXEM")
+        self.eat(expected_type)
 
         return token.value
 
     def expression(self, result):
-        while self.current_token.type in operators:
+        # Expected Pattern: [INTEGER, [OPERATOR, INTEGER]*]
+        while self.current_token.type in expr_operator_types:
             if self.current_token.type == TokenType.PLUS.name:
                 self.eat("PLUS")
                 result += self.term_integer()
-            if self.current_token.type == TokenType.MINUS.name:
+            elif self.current_token.type == TokenType.MINUS.name:
                 self.eat("MINUS")
                 result -= self.term_integer()
-            if self.current_token.type == TokenType.MULT.name:
+            elif self.current_token.type == TokenType.MULT.name:
                 self.eat("MULT")
                 result *= self.term_integer()
-            if self.current_token.type == TokenType.DIV.name:
+            elif self.current_token.type == TokenType.DIV.name:
                 self.eat("DIV")
                 result = result / self.term_integer()
+        else:
+            if self.current_token.type != TokenType.EOF.name:
+                cond_operator = self.current_token.value
+                if cond_operator == ">":
+                    self.eat(TokenType.GREATER.name)
+                elif cond_operator == "<":
+                    self.eat(TokenType.LESSER.name)
+
+                result = self.condition(result, cond_operator)
 
         return result
+
+    def condition(self, left, operator):
+        # Expected Pattern: [INTEGER, OPERATOR, INTEGER]
+        right = self.term(TokenType.INTEGER.name)
+
+        cond = False
+        match operator:
+            case ">":
+                cond = left > right
+            case "<":
+                cond = left < right
+        return int(cond)
 
     def expr(self):
         # Pattern Expression : [INTEGER, [OPERATOR, INTEGER]*]
@@ -126,9 +158,9 @@ class Tokenizer:
         result = None
 
         if self.current_token.type == TokenType.INTEGER.name:
-            result = self.term_integer()
+            result = self.term(TokenType.INTEGER.name)
             result = self.expression(result)
         elif self.current_token.type == TokenType.FUNC.name:
-            print(self.current_token.value)
+            result = self.term(TokenType.FUNC.name)
 
         return result

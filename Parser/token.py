@@ -11,6 +11,13 @@ class TokenType(Enum):
     DIV = "/"
     MULT = "*"
 
+    DOUBLE_EQUAL = "=="
+    GREATER = ">"
+    LESSER = "<"
+    GREATER_EQUAL = ">="
+    LESSER_EQUAL = "<="
+    NOT_EQUAL = "!="
+
     # Separators
     SPACE = " "
     LPAREN = "("
