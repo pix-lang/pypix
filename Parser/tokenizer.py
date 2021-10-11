@@ -1,7 +1,5 @@
-from Parser.token import Token
-from Parser.pattern_matching import (if_statement,
-                                     while_loop,
-                                     condition_evaluation)
+from Parser.token import Token, TokenType
+from Parser.static import categorize
 
 operators = ["PLUS", "MINUS", "MULT", "DIV"]
 separators = [" ", "("]
@@ -60,24 +58,27 @@ class Tokenizer:
 
             if self.current_char == '+':
                 self.advance()
-                return Token("PLUS", '+')
+                return Token(TokenType.PLUS.name, TokenType.PLUS.value)
 
             if self.current_char == '-':
                 self.advance()
-                return Token("MINUS", '-')
+                return Token(TokenType.MINUS.name, TokenType.MINUS.value)
 
             if self.current_char == '*':
                 self.advance()
-                return Token("MULT", '*')
+                return Token(TokenType.MULT.name, TokenType.MULT.value)
 
             if self.current_char == '/':
                 self.advance()
-                return Token("DIV", '/')
+                return Token(TokenType.DIV.name, TokenType.DIV.value)
 
             if self.current_char not in operators + separators:
-                result = self.current_char
-                self.advance()
-                return Token("LEXEM", self.lexem(result))
+                result = ""
+                while self.current_char not in operators + separators:
+                    result += self.current_char
+                    self.advance()
+
+                return categorize(result)
 
             self.error()
 
@@ -102,46 +103,32 @@ class Tokenizer:
         return token.value
 
     def expression(self, result):
-        while self.current_token.type in ("PLUS", "MINUS", "MULT", "DIV"):
-            if self.current_token.type == "PLUS":
+        while self.current_token.type in operators:
+            if self.current_token.type == TokenType.PLUS.name:
                 self.eat("PLUS")
                 result += self.term_integer()
-            if self.current_token.type == "MINUS":
+            if self.current_token.type == TokenType.MINUS.name:
                 self.eat("MINUS")
                 result -= self.term_integer()
-            if self.current_token.type == "MULT":
+            if self.current_token.type == TokenType.MULT.name:
                 self.eat("MULT")
                 result *= self.term_integer()
-            if self.current_token.type == "DIV":
+            if self.current_token.type == TokenType.DIV.name:
                 self.eat("DIV")
                 result = result / self.term_integer()
 
         return result
 
-    def categorize(self, result):
-        current_char = ""
-        i = 0
-
-        while current_char not in separators + operators:
-            current_char = result[i]
-            i += 1
-
-        statement = result[0:i-1]
-        if statement == "if":
-            ...
-
-        print(condition_evaluation(if_statement, result))
-
-        return result
-
     def expr(self):
+        # Pattern Expression : [INTEGER, OPERATOR]* INTEGER
+        # Pattern Function   : [FUNC, ARG: [LPAREN, ARG*, RPAREN], EVAL: [LCURL, EXEC*, RCURL]]
         self.current_token = self.get_next_token()
+        result = None
 
-        result = self.term_integer() if isinstance(self.current_token.value, int) else self.term_lexem()
-
-        if isinstance(result, int):
+        if self.current_token.type == TokenType.INTEGER.name:
+            result = self.term_integer()
             result = self.expression(result)
-        elif isinstance(result, str):
-            result = self.categorize(result)
+        elif self.current_token.type == TokenType.FUNC.name:
+            print(self.current_token.value)
 
         return result

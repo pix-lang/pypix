@@ -1,11 +1,35 @@
-token_names = [
-    "INTEGER",
-    "PLUS",
-    "MINUS",
-    "MULT",
-    "DIV",
-    "EOF"
-]
+from enum import Enum
+
+
+class TokenType(Enum):
+    """Tokens to represent different commands
+    in the Pix programming language."""
+
+    # Operators
+    PLUS = "+"
+    MINUS = "-"
+    DIV = "/"
+    MULT = "*"
+
+    # Separators
+    SPACE = " "
+    LPAREN = "("
+    RPAREN = ")"
+    LCURL = "{"
+    RCURL = "}"
+    LSQUARE = "["
+    RSQUARE = "]"
+
+    # Keywords
+    IF = "if"
+    DEF = "def"
+    FUNC = "func"
+    WHILE = "while"
+    FOR = "for"
+
+    # Types
+    INTEGER = "INTEGER"
+    EOF = "EOF"
 
 
 class Token:

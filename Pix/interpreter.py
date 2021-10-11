@@ -7,13 +7,13 @@ from Parser.tokenizer import Tokenizer
 def main():
     file = sys.argv[1]
     with open(file, 'r') as f:
-        code = f.readlines()
-    for line in code:
-        line = line.strip()
-        token_stream = Tokenizer(line)
-        result = token_stream.expr()
+        # Read file and remove `\n`
+        code = f.read().strip()
 
-        print(result)
+    token_stream = Tokenizer(code)
+    result = token_stream.expr()
+
+    print(result)
 
 
 if __name__ == "__main__":
