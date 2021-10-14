@@ -11,12 +11,18 @@ class TokenType(Enum):
     DIV = "/"
     MULT = "*"
 
+    MODULO = "%"
+
+    # Comparison Operators
     DOUBLE_EQUAL = "=="
     GREATER = ">"
     LESSER = "<"
     GREATER_EQUAL = ">="
     LESSER_EQUAL = "<="
     NOT_EQUAL = "!="
+
+    # Assignment Operators
+    EQUAL = "="
 
     # Separators
     SPACE = " "

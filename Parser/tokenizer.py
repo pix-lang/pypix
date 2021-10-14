@@ -1,9 +1,8 @@
 from Parser.token import Token, TokenType
-from Parser.static import categorize
 
 operators = ["+", "-", "*", "/", ">"]
-expr_operator_types = ["PLUS", "MINUS", "MULT", "DIV"]
-cond_operators = [">", "<"]
+expr_operator_types = ["PLUS", "MINUS", "MULT", "DIV", "MODULO"]
+cond_operators = [">", "<", "=="]
 separators = [" ", "("]
 
 
@@ -48,9 +47,22 @@ class Tokenizer:
 
         return result
 
+    @staticmethod
+    def categorize(result):
+        match result:
+            case "if":
+                return Token(TokenType.IF.name, TokenType.IF.value)
+            case "def":
+                return Token(TokenType.DEF.name, TokenType.DEF.value)
+            case "func":
+                return Token(TokenType.FUNC.name, TokenType.FUNC.value)
+            case "while":
+                return Token(TokenType.WHILE.name, TokenType.WHILE.value)
+            case "for":
+                return Token(TokenType.FOR.name, TokenType.FOR.value)
+
     def get_next_token(self) -> Token:
         while self.current_char is not None:
-
             if self.current_char.isspace():
                 self.skip_whitespace()
                 continue
@@ -74,6 +86,22 @@ class Tokenizer:
                 self.advance()
                 return Token(TokenType.DIV.name, TokenType.DIV.value)
 
+            if self.current_char == "%":
+                self.advance()
+                return Token(TokenType.MODULO.name, TokenType.MODULO.value)
+
+            if self.current_char == "=":
+                result = ""
+                while self.current_char == "=":
+                    result += self.current_char
+                    self.advance()
+
+                match result:
+                    case "=":
+                        return Token(TokenType.EQUAL.name, TokenType.EQUAL.value)
+                    case "==":
+                        return Token(TokenType.DOUBLE_EQUAL.name, TokenType.DOUBLE_EQUAL.value)
+
             if self.current_char == ">":
                 self.advance()
                 return Token(TokenType.GREATER.name, TokenType.GREATER.value)
@@ -88,7 +116,7 @@ class Tokenizer:
                     result += self.current_char
                     self.advance()
 
-                return categorize(result)
+                return self.categorize(result)
 
             self.error()
 
@@ -115,25 +143,32 @@ class Tokenizer:
     def expression(self, result):
         # Expected Pattern: [INTEGER, [OPERATOR, INTEGER]*]
         while self.current_token.type in expr_operator_types:
-            if self.current_token.type == TokenType.PLUS.name:
-                self.eat("PLUS")
-                result += self.term_integer()
-            elif self.current_token.type == TokenType.MINUS.name:
-                self.eat("MINUS")
-                result -= self.term_integer()
-            elif self.current_token.type == TokenType.MULT.name:
-                self.eat("MULT")
-                result *= self.term_integer()
-            elif self.current_token.type == TokenType.DIV.name:
-                self.eat("DIV")
-                result = result / self.term_integer()
+            match self.current_token.type:
+                case TokenType.PLUS.name:
+                    self.eat("PLUS")
+                    result += self.term_integer()
+                case TokenType.MINUS.name:
+                    self.eat("MINUS")
+                    result -= self.term_integer()
+                case TokenType.MULT.name:
+                    self.eat("MULT")
+                    result *= self.term_integer()
+                case TokenType.DIV.name:
+                    self.eat("DIV")
+                    result = result / self.term_integer()
+                case TokenType.MODULO.name:
+                    self.eat("MODULO")
+                    result = result % self.term_integer()
         else:
             if self.current_token.type != TokenType.EOF.name:
                 cond_operator = self.current_token.value
-                if cond_operator == ">":
-                    self.eat(TokenType.GREATER.name)
-                elif cond_operator == "<":
-                    self.eat(TokenType.LESSER.name)
+                match cond_operator:
+                    case ">":
+                        self.eat(TokenType.GREATER.name)
+                    case "<":
+                        self.eat(TokenType.LESSER.name)
+                    case "==":
+                        self.eat(TokenType.DOUBLE_EQUAL.name)
 
                 result = self.condition(result, cond_operator)
 
@@ -149,6 +184,8 @@ class Tokenizer:
                 cond = left > right
             case "<":
                 cond = left < right
+            case "==":
+                cond = left == right
         return int(cond)
 
     def expr(self):

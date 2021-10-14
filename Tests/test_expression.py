@@ -51,11 +51,22 @@ class TestExpression(unittest.TestCase):
 
         self.expression_equal(tests)
 
+    def test_modulo(self):
+        tests = {
+            "10 % 3": 1,
+            "10 % 2": 0,
+            "33 % 10": 3,
+            "10 % 33": 10
+        }
+
+        self.expression_equal(tests)
+
     def test_all_operators(self):
         tests = {
             "10 * 5 - 3 / 3 + 1": 16.666666666666664,
             "10 / 5 * 2 + 3 - 8": -1,
             "400 - 3 * 10 + 4": 3974,
+            "562 % 4 * 73 / 10 + 20 - 4": 30.6
         }
 
         self.expression_equal(tests)

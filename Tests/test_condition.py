@@ -2,7 +2,7 @@ import unittest
 from Parser.tokenizer import Tokenizer
 
 
-class MyTestCase(unittest.TestCase):
+class TestCondition(unittest.TestCase):
     def expression_equal(self, tests: dict):
         """The "tests" dictionary contains an expression and the expected return value
         after parsing"""
@@ -36,3 +36,17 @@ class MyTestCase(unittest.TestCase):
 
         self.expression_equal(tests)
 
+    def test_equal(self):
+        tests = {
+            "5 == 0": 0,
+            "4 == 4": 1,
+
+            "4==4": 1,
+            "3 ==2": 0
+        }
+
+        self.expression_equal(tests)
+
+        with self.assertRaises(Exception):
+            token_stream = Tokenizer("4 = = 1")
+            token_stream.expr()
